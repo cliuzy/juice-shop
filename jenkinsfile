@@ -19,3 +19,52 @@ pipeline {
         }
     }
 }
+
+
+
+// pipeline {
+//     agent any
+
+//     environment {
+//         DEFECTDOJO_API_KEY = credentials('defectdojo-api-key')
+//         DEFECTDOJO_URL = 'https://demo.defectdojo.org/api/v2/'
+//     }
+
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 git 'https://github.com/cliuzy/juice-shop'
+//             }
+//         }
+
+//         stage('Gitleaks Scan') {
+//             steps {
+//                 sh 'gitleaks detect -s . -r reports/gitleaks.json --report-format json'
+//             }
+//         }
+
+//         stage('Semgrep Scan') {
+//             steps {
+//                 sh 'semgrep --config auto --sarif --output reports/semgrep.sarif'
+//             }
+//         }
+
+//         stage('NJSSCAN') {
+//             steps {
+//                 sh 'njsscan . --json > reports/njsscan.json'
+//             }
+//         }
+
+//         stage('Upload to DefectDojo') {
+//             steps {
+//                 sh 'python3 upload_to_defectdojo.py'
+//             }
+//         }
+//     }
+
+//     post {
+//         always {
+//             archiveArtifacts artifacts: 'reports/**', fingerprint: true
+//         }
+//     }
+// }
